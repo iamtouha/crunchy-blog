@@ -2,7 +2,7 @@ import Link from "next/link";
 import React from "react";
 import { Post } from "~/app/types";
 
-export default function PostCard({ post }: { post: Post }) {
+export function PostCard({ post }: { post: Post }) {
   return (
     <Link href={`/posts/${post.id}`}>
       <div className="border rounded-md p-4 bg-secondary/20">

@@ -1,9 +1,6 @@
-import Image from "next/image";
 import { api } from "~/lib/utils/api";
 import { Post } from "../types";
-import PostCard from "~/components/post-card";
-import { use } from "react";
-import PostsList from "~/components/posts-list";
+import { PostsList } from "~/components/posts-list";
 
 export default async function Home() {
   const posts = await api<Post[]>("/posts");

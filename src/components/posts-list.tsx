@@ -1,9 +1,9 @@
 "use client";
 import { Post } from "~/app/types";
 import { usePagination } from "~/lib/contexts/pagination";
-import PostCard from "./post-card";
+import { PostCard } from "./post-card";
 
-export default function PostsList({ posts }: { posts: Post[] }) {
+export function PostsList({ posts }: { posts: Post[] }) {
   const { page, nextPage, prevPage, haveNextPage, havePrevPage } =
     usePagination(posts.length);
 
