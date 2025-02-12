@@ -35,7 +35,7 @@ export function PostsList({ posts }: { posts: Post[] }) {
   );
 }
 
-const ArrowNextIcon = (props: React.SVGProps<SVGSVGElement>) => (
+export const ArrowNextIcon = (props: React.SVGProps<SVGSVGElement>) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 24 24"

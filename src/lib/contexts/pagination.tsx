@@ -10,14 +10,15 @@ type Pagination = {
 };
 const PaginationContext = createContext<Pagination | null>(null);
 
+const savedPage =
+  typeof window !== "undefined" ? localStorage?.getItem("page") : null;
+
 export function PaginationProvider({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const [page, setPage] = useState(() =>
-    Number(localStorage.getItem("page") ?? 0)
-  );
+  const [page, setPage] = useState(() => Number(savedPage ?? 0));
   const nextPage = useCallback(
     () =>
       setPage((prev) => {
