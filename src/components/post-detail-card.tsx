@@ -1,5 +1,4 @@
 import Link from "next/link";
-import React from "react";
 import { Post, User } from "~/app/types";
 
 export default function PostDetailCard({
@@ -19,7 +18,10 @@ export default function PostDetailCard({
         <p className="text-text/80 text-xl leading-loose">{post.body}</p>
       </div>
       <div className="flex justify-center mt-6">
-        <Link className="text-primary " href="/">
+        <Link
+          className="text-primary block size-12 bg-transparent hover:bg-primary/10 rounded-full p-2 transition-colors cursor-pointer"
+          href="/"
+        >
           <ArrowNextIcon className="size-8 rotate-180" />
         </Link>
       </div>

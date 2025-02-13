@@ -33,7 +33,12 @@ export function PostsList({ posts }: { posts: Post[] }) {
           className="border text-lg px-4 py-2 w-full rounded-md bg-primary/20 focus:outline-none focus:ring-2 focus:ring-primary/50"
         />
       </div>
-      <div className="flex flex-col w-full gap-2 px-2 py-6">
+      <div className="flex flex-col w-full gap-2 px-2 py-6 h-[450px] justify-around">
+        {!paginatedPosts.length && (
+          <p className="text-text/50 text-center bg-secondary/10 rounded-md h-full items-center justify-center flex">
+            No posts found
+          </p>
+        )}
         {paginatedPosts.map((post) => (
           <PostCard key={post.id} post={post} />
         ))}
@@ -46,7 +51,9 @@ export function PostsList({ posts }: { posts: Post[] }) {
         >
           <ArrowNextIcon className="rotate-180 size-8" />
         </button>
-        <span className="text-accent font-black text-3xl">{page + 1}</span>
+        <span className="text-accent font-black text-3xl w-12 text-center">
+          {page + 1}
+        </span>
         <button
           onClick={nextPage}
           disabled={!haveNextPage}

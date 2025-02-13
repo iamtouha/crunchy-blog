@@ -49,6 +49,13 @@ export function usePagination(posts: Post[]) {
       }),
     [setPage]
   );
+  const setSearchHandler = React.useCallback(
+    (text: string) => {
+      setPage(0);
+      setSearch(text);
+    },
+    [setSearch, setPage]
+  );
 
   const filteredPosts = React.useMemo(() => {
     return search.trim().length
@@ -76,6 +83,6 @@ export function usePagination(posts: Post[]) {
     haveNextPage,
     havePrevPage,
     search,
-    setSearch,
+    setSearch: setSearchHandler,
   };
 }
