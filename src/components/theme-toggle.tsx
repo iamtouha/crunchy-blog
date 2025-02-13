@@ -5,7 +5,7 @@ export function ThemeToggle() {
   const [theme, setTheme] = useTheme();
   return (
     <button
-      className="text-secondary size-10"
+      className="text-secondary dark:text-secondary/60 size-8 flex items-center justify-center leading-none rounded-full hover:bg-secondary/20 transition-colors"
       onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
     >
       <MoonIcon className="size-6 dark:block hidden" />

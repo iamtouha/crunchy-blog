@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { ThemeToggle } from "~/components/theme-toggle";
 import { PaginationProvider } from "~/lib/contexts/pagination";
 
@@ -9,10 +10,11 @@ export default function MainLayout({
   return (
     <>
       <header className="h-16 bg-primary/20 shadow relative">
-        <div className="absolute inset-0 flex items-center justify-center">
-          <h1 className="text-accent text-4xl font-black">Crunchy Blog</h1>
-        </div>
-        <div className="absolute inset-0 flex items-center justify-end">
+        <div className="flex h-full items-center justify-between px-4">
+          <div className="w-8"></div>
+          <Link href="/">
+            <h1 className="text-accent text-4xl font-black">Crunchy Blog</h1>
+          </Link>
           <ThemeToggle />
         </div>
       </header>
