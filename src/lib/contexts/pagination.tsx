@@ -1,65 +1,81 @@
 "use client";
 
-import { createContext, useCallback, useContext, useState } from "react";
+import * as React from "react";
+import { Post } from "~/app/types";
 
 type Pagination = {
   page: number;
-  perPage: number;
-  nextPage: () => void;
-  prevPage: () => void;
+  setPage: React.Dispatch<React.SetStateAction<number>>;
+  search: string;
+  setSearch: React.Dispatch<React.SetStateAction<string>>;
 };
-const PaginationContext = createContext<Pagination | null>(null);
-
-const savedPage =
-  typeof window !== "undefined" ? localStorage?.getItem("page") : null;
+const PaginationContext = React.createContext<Pagination | null>(null);
 
 export function PaginationProvider({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const [page, setPage] = useState(() => Number(savedPage ?? 0));
-  const nextPage = useCallback(
-    () =>
-      setPage((prev) => {
-        localStorage.setItem("page", String(prev + 1));
-        return prev + 1;
-      }),
-    []
-  );
-  const prevPage = useCallback(
-    () =>
-      setPage((prev) => {
-        localStorage.setItem("page", String(prev - 1));
-        return prev - 1;
-      }),
-    []
-  );
+  const [page, setPage] = React.useState(0);
+  const [search, setSearch] = React.useState("");
 
   return (
-    <PaginationContext.Provider
-      value={{ page, perPage: 5, nextPage, prevPage }}
-    >
+    <PaginationContext.Provider value={{ page, setPage, search, setSearch }}>
       {children}
     </PaginationContext.Provider>
   );
 }
 
-export function usePagination(length: number) {
-  const pagination = useContext(PaginationContext);
+export function usePagination(posts: Post[]) {
+  const perPage = 5;
+  const totalPage = Math.floor(posts.length / perPage);
+  const pagination = React.useContext(PaginationContext);
   if (!pagination) {
     throw new Error("usePagination must be used within a PaginationProvider");
   }
-  const { page, perPage, nextPage, prevPage } = pagination;
+  const { page, setPage, search, setSearch } = pagination;
 
-  const haveNextPage = page * perPage + perPage < length;
+  const nextPage = React.useCallback(
+    () =>
+      setPage((prev) => {
+        return prev + 1;
+      }),
+    [setPage]
+  );
+  const prevPage = React.useCallback(
+    () =>
+      setPage((prev) => {
+        return prev - 1;
+      }),
+    [setPage]
+  );
+
+  const filteredPosts = React.useMemo(() => {
+    return search.trim().length
+      ? posts.filter((post) =>
+          post.title.toLowerCase().includes(search.trim().toLowerCase())
+        )
+      : posts;
+  }, [posts, search]);
+
+  const paginatedPosts = React.useMemo(() => {
+    const startIndex = page * perPage;
+    const endIndex = startIndex + perPage;
+    return filteredPosts.slice(startIndex, endIndex);
+  }, [filteredPosts, page]);
+
+  const haveNextPage = (page + 1) * perPage < filteredPosts.length;
   const havePrevPage = page > 0;
 
   return {
     page,
+    totalPage,
+    paginatedPosts,
     nextPage,
     prevPage,
     haveNextPage,
     havePrevPage,
+    search,
+    setSearch,
   };
 }

@@ -4,8 +4,16 @@ import { usePagination } from "~/lib/contexts/pagination";
 import { PostCard } from "./post-card";
 
 export function PostsList({ posts }: { posts: Post[] }) {
-  const { page, nextPage, prevPage, haveNextPage, havePrevPage } =
-    usePagination(posts.length);
+  const {
+    page,
+    nextPage,
+    prevPage,
+    search,
+    setSearch,
+    paginatedPosts,
+    haveNextPage,
+    havePrevPage,
+  } = usePagination(posts);
 
   return (
     <>
@@ -19,12 +27,14 @@ export function PostsList({ posts }: { posts: Post[] }) {
         <input
           type="text"
           id="search"
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
           placeholder="Search posts"
           className="border text-lg px-4 py-2 w-full rounded-md bg-primary/20 focus:outline-none focus:ring-2 focus:ring-primary/50"
         />
       </div>
       <div className="flex flex-col w-full gap-2 px-2 py-6">
-        {posts.slice(page * 5, page * 5 + 5).map((post) => (
+        {paginatedPosts.map((post) => (
           <PostCard key={post.id} post={post} />
         ))}
       </div>
