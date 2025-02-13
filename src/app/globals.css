@@ -21,7 +21,8 @@ body {
   @apply bg-background text-text font-sans;
 }
 
+body,
 * {
   box-sizing: border-box;
-  @apply border-primary/50;
+  @apply border-primary/50 font-sans;
 }

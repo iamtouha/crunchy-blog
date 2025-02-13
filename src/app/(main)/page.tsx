@@ -6,7 +6,7 @@ export default async function Home() {
   const posts = await api<Post[]>("/posts");
 
   return (
-    <div className="h-[calc(100vh-8rem)] flex flex-col gap-6 justify-center">
+    <div className="mt-12 flex flex-col gap-6">
       <PostsList posts={posts} />
     </div>
   );
