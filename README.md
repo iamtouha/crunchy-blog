@@ -1,36 +1,31 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Crunchy Blog
 
-## Getting Started
+## Description
 
-First, run the development server:
+Read the latest blog posts
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Project Approach and Implementation:
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- The project was built using Next.js, a React framework. Using Next.js allowed to create server-side rendered pages, which is beneficial for SEO and performance.
+- Tailwind CSS was used for styling. Tailwind CSS is a utility-first CSS framework that allows to build custom designs without leaving the HTML.
+- The blog posts are fetched from JSON Placeholder, a free fake online REST API for testing and prototyping.
+- The blog posts are displayed on the home page. Each blog post is a link card with a title.
+- Client side pagination is implemented. The user can navigate through the blog posts using the next and previous buttons.
+- When a blog post is clicked, the user is taken to the blog post page, where the full blog post and the author information is displayed.
+- The blog post page also has a back button that takes the user back to the home page.
+- The project is responsive and works on mobile, tablet, and desktop devices.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Tech Stack:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- Next.js (v15)
+- Tailwind CSS
+- JSON Placeholder
 
-## Learn More
+## Challenges and Solutions:
 
-To learn more about Next.js, take a look at the following resources:
+- One of the challenges was to implement client side pagination such a way that it doesn't lose the state when the user navigates to a different page. The solution was to use the React Context API to store the current page number and the blog posts. This way, the state is preserved when the user navigates back and forth between the pages.
+- Another challenge was to display the author information on the blog post page. The solution was to fetch the author information from JSON Placeholder using the author ID provided in the blog post data.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Use of AI Tools
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- AI tools were used to rewrite the Readme file only for more clarity and conciseness.
